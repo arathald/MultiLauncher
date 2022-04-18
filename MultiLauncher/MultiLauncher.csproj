@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net6.0-windows</TargetFramework>
@@ -8,6 +7,11 @@
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
         <ApplicationIcon>MultiLaunch.ico</ApplicationIcon>
+        <Company>arathald</Company>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyVersion>1.0.0.1</AssemblyVersion>
+        <FileVersion>1.0.0.1</FileVersion>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -34,5 +38,4 @@
       <None Remove="applications.json" />
       <EmbeddedResource Include="applications_default.json" />
     </ItemGroup>
-
 </Project>
