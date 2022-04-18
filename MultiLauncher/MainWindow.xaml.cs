@@ -22,7 +22,7 @@ namespace MultiLauncher {
         }
 
         private void Start() {
-            var text = File.ReadAllText("applications.json");
+            var text = File.ReadAllText(App.ApplicationConfigPath);
             var applicationConfigs = JsonSerializer.Deserialize<List<TargetApplication.ApplicationConfig>>(text);
 
             var marginWidth = 5;

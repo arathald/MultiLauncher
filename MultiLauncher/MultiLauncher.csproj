@@ -5,22 +5,15 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <Configurations>Debug;Release;Deploy</Configurations>
+        <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <ApplicationIcon>MultiLaunch.ico</ApplicationIcon>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Deploy' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
-      <PostBuildEvent>
-        Xcopy /e /t /s /i /y C:\Users\arath\RiderProjects\MultiLauncher\MultiLauncher\bin\Release\net6.0-windows\* D:\Programs\MultiLauncher
-      </PostBuildEvent>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <PlatformTarget>x64</PlatformTarget>
+      <DebugType>none</DebugType>
     </PropertyGroup>
-
-    <ItemGroup>
-      <None Update="applications.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="MahApps.Metro" Version="2.4.9" />
@@ -35,6 +28,11 @@
         <Generator>MSBuild:Compile</Generator>
         <DependentUpon>MainWindow.xaml</DependentUpon>
       </ApplicationDefinition>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="applications.json" />
+      <EmbeddedResource Include="applications_default.json" />
     </ItemGroup>
 
 </Project>
