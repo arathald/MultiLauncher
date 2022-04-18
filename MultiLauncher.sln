@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLauncher", "MultiLauncher\MultiLauncher.csproj", "{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Deploy|Any CPU = Deploy|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{4E7A0B4B-28AC-46E1-813B-1300480BFB6A}.Deploy|Any CPU.Deploy.0 = Deploy|Any CPU
+	EndGlobalSection
+EndGlobal

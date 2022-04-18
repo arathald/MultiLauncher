@@ -1,0 +1,56 @@
+﻿[
+  { 
+    "displayName": "RealTraffic",
+    "path": "C:\\Program Files\\RealTrafficLauncher\\RealTrafficLauncher.exe",
+    "arguments": "",
+    "startIn": "C:\\Program Files\\RealTrafficLauncher\\",
+    "requiresAdmin": false,
+    "keepAlive": true,
+    "autoStart": false
+  },
+  {
+    "displayName": "PSXT",
+    "path": "C:\\PSXT_MSFS\\Start_PSXT_MSFS.bat",
+    "arguments": "",
+    "startIn": "C:\\PSXT_MSFS",
+    "requiresAdmin": false,
+    "keepAlive": true,
+    "autoStart": false
+  },
+  {
+    "displayName": "Air Manager",
+    "path": "C:\\Program Files\\Air Manager\\air_manager.bat",
+    "arguments": "",
+    "startIn": "C:\\Program Files\\Air Manager",
+    "requiresAdmin": false,
+    "keepAlive": true,
+    "autoStart": false
+  },
+  {
+    "displayName": "OpenTrack",
+    "path": "C:\\Program Files (x86)\\opentrack\\opentrack.exe",
+    "arguments": "",
+    "startIn": "C:\\Program Files (x86)\\opentrack",
+    "requiresAdmin": false,
+    "keepAlive": true,
+    "autoStart": false
+  },
+  {
+    "displayName": "STUSB",
+    "path": "D:\\Programs\\stusb\\startSTUSB.bat",
+    "arguments": "",
+    "startIn": "D:\\Programs\\stusb",
+    "requiresAdmin": false,
+    "keepAlive": false,
+    "autoStart": false
+  },
+  {
+    "displayName": "Pilot2ATC",
+    "path": "C:\\Pilot2ATC_2020_x64\\Pilot2ATC_2020.exe",
+    "arguments": "",
+    "startIn": "C:\\Pilot2ATC_2020_x64",
+    "requiresAdmin": false,
+    "keepAlive": true,
+    "autoStart": false
+  }
+]
