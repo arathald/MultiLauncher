@@ -1,4 +1,8 @@
 # MultiLauncher
+MultiLauncher is a utility application to start and monitor various tools and plugins from a single window. I built it for use in MS Flight Simulator 2020, but only the examples are specific to that game, it should work for many activities and workflows, particularly those with long-running processes that can be unstable. See the **Configuration** section below for a complete list of current features.
+
+![image](https://user-images.githubusercontent.com/6439881/164614336-214160ec-da67-49e5-9f06-d0ee303359d1.png)
+
 ## Installation
 To install, download the appropriate executable from the releases and copy it to the location of your choosing. MultiLauncher requires .NET 6.0, which you may have to install yourself if the program exits immediately and you're not prompted to on first run.
 ### Upgrading
@@ -11,7 +15,7 @@ When you first launch the application, it will create a default `applications.js
 * **arguments**: Any arguments you want passed in to the target in `path`
 * **startIn**: The folder to start the target in. Usually the same folder the file in `path` is in.
 * **requiresAdmin**: If set to true, MultiLauncher will begin this program as admin. If you launch MultiLauncher as a normal user (recommended), this will cause a UAT prompt each time it starts the target application.
-* **keepAlive**: If set to true and the target application exits in any way other than closing it through MultiLauncher, MultiLauncher will automatically start it back up again. Note that this includes if you close the target application manually. *Please be careful with this feature as MultiLauncher cannot properly detect all processes in some applications which can lead it to continue spawning new copies of them. See Known Issues below.*
+* **keepAlive**: *!experimental!* If set to true and the target application exits in any way other than closing it through MultiLauncher, MultiLauncher will automatically start it back up again. Note that this includes if you close the target application manually. *Please be careful with this feature as MultiLauncher cannot properly detect all processes in some applications which can lead it to continue spawning new copies of them. See Known Issues below.*
 * **autoStart**: Start the target application immediately when MultiLauncher starts.
 ### Interface
 Click the Start button to start an application, and the Close button to close it. There's an Indicator to the left of each application name with the following meanings:
