@@ -1,7 +1,10 @@
-# MultiLauncher
-MultiLauncher is a utility application to start and monitor various tools and plugins from a single window. I built it for use in MS Flight Simulator 2020, but only the examples are specific to that game, it should work for many activities and workflows, particularly those with long-running processes that can be unstable. See the **Configuration** section below for a complete list of current features.
+# <img src="https://github.com/arathald/MultiLauncher/blob/main/MultiLaunch%20Icon.png" width=50 alt="MultiLauncher Local"/> MultiLauncher
 
-![image](https://user-images.githubusercontent.com/6439881/164614336-214160ec-da67-49e5-9f06-d0ee303359d1.png)
+
+MultiLauncher is a utility application to start and monitor various tools and plugins from a single window. I built it for use in MS Flight Simulator 2020, but only the examples are specific to that game, it should work for many activities and workflows, particularly those with long-running processes that can be unstable. See the **Configuration** section below for a complete list of current features.
+<br/>
+<br/>
+<img src="https://user-images.githubusercontent.com/6439881/164614336-214160ec-da67-49e5-9f06-d0ee303359d1.png" alt="MultiLauncher Screenshot"/>
 
 ## Installation
 To install, download the appropriate executable from the releases and copy it to the location of your choosing. MultiLauncher requires .NET 6.0, which you may have to install yourself if the program exits immediately and you're not prompted to on first run.
