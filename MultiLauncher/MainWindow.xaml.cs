@@ -17,35 +17,42 @@ namespace MultiLauncher {
         private readonly Dictionary<string, TargetApplication> _applications = new ();
         
         public MainWindow() {
-            foreach (var config in ReadConfig()) {
-                var application = new TargetApplication(config);
-                _applications.Add(config.path, application);
+            try {
+                foreach (var config in ReadConfig()) {
+                    var application = new TargetApplication(config);
+                    _applications.Add(config.path, application);
+                }
+
+                Initialize();
+            } catch (Exception e) {
+                Log.Error(e, "Uncaught exception");
             }
-            
-            Initialize();
         }
 
         private MainWindow(List<TargetApplication> applications) {
-            foreach (var application in applications) {
-                _applications.Add(application.Config.path, application);
-                application.ReinitializeDisplayElements();
+            try {
+                foreach (var application in applications) {
+                    _applications.Add(application.Config.path, application);
+                    application.ReinitializeDisplayElements();
+                    Initialize();
+                }
+            } catch (Exception e) {
+                Log.Error(e, "Uncaught exception");
             }
-            Initialize();
         }
 
         private void Initialize() {
             InitializeComponent();
-
-            var version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
-            if (version != null) {
-                Version.Text = "Version " + version;
+            
+            var filename = Process.GetCurrentProcess().MainModule?.FileName;
+            if (filename != null) {
+                Version.Text = "Version " + FileVersionInfo.GetVersionInfo(filename).ProductVersion;;
             }
-
-            try {
-                Start();
-            } catch (Exception e) {
-                Log.Error(e, "Uncaught exception");
+            else {
+                Log.Warning("Could not get version number from running process");
             }
+            
+            Start();
         }
 
         private List<TargetApplication.ApplicationConfig> ReadConfig() {
