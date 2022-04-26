@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,8 +32,9 @@ namespace MultiLauncher {
                 foreach (var application in applications) {
                     _applications.Add(application.Config.path, application);
                     application.ReinitializeDisplayElements();
-                    Initialize();
                 }
+                
+                Initialize();
             } catch (Exception e) {
                 Log.Error(e, "Uncaught exception");
             }
@@ -46,9 +45,8 @@ namespace MultiLauncher {
             
             var filename = Process.GetCurrentProcess().MainModule?.FileName;
             if (filename != null) {
-                Version.Text = "Version " + FileVersionInfo.GetVersionInfo(filename).ProductVersion;;
-            }
-            else {
+                Version.Text = "Version " + FileVersionInfo.GetVersionInfo(filename).ProductVersion;
+            } else {
                 Log.Warning("Could not get version number from running process");
             }
             
