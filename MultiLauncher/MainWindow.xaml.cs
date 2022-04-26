@@ -114,6 +114,8 @@ namespace MultiLauncher {
                     newElements[i].Margin = elementMargin;
                 }
             }
+
+            ResizeScrollArea();
         }
 
         private void Settings_OnClick(object sender, RoutedEventArgs e) {
@@ -122,6 +124,14 @@ namespace MultiLauncher {
             settings.Left = this.Left + this.Width / 2 - settings.Width / 2;
             settings.Top = this.Top + this.Height / 2 - settings.Height / 2;
             settings.ShowDialog();
+        }
+
+        private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e) {
+            ResizeScrollArea();
+        }
+
+        private void ResizeScrollArea() {
+            ScrollArea.Height = this.Height - this.TitleBarHeight - Footer.ActualHeight - Footer.Margin.Top - Footer.Margin.Bottom - 5;
         }
     }
 }
