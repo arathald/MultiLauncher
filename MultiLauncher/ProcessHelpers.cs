@@ -25,25 +25,6 @@ public static class ProcessHelpers {
         return children;
     }
 
-    public static void getCurrentProcessData() {
-        var processId = Process.GetCurrentProcess().Id;
-        Dictionary<string, object> properties = new();
-        Dictionary<string, object> systemProperties = new();
-        var objectSearcher2 = new ManagementObjectSearcher($"Select * From Win32_Process Where ProcessID={processId}");
-        foreach (var managementBaseObject in objectSearcher2.Get()) {
-            
-            foreach (var propertyData in managementBaseObject.Properties) {
-                properties.Add(propertyData.Name, propertyData.Value);
-            }
-            
-            foreach (var systemProperty in managementBaseObject.SystemProperties) {
-                systemProperties.Add(systemProperty.Name, systemProperty.Value);
-            }
-        }
-
-        var a = 2;
-    }
-    
     public static bool IsAssociated(Process process) {
         // For some reason, can't access process.Associated here, so instead catch and check the error :(
         try {

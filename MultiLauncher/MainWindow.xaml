@@ -7,20 +7,30 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="MultiLauncher" Height="500" Width="400">
-    <Grid Name="ContentGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Margin="0,10">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24">
-                MultiLauncher
-            </TextBlock>
-        </StackPanel>
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <Grid Name="ContentGrid" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Margin="0,10">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24">
+                    MultiLauncher
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Name="Footer" DockPanel.Dock="Bottom" Height="35" HorizontalAlignment="Stretch" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="Version" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" ></TextBlock>
+            <Button Name="Settings" Grid.Column="1" Click="Settings_OnClick" HorizontalAlignment="Right">Settings</Button>
+        </Grid>
+    </DockPanel>
 </mah:MetroWindow>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,24 +14,57 @@ using Serilog;
 
 namespace MultiLauncher; 
 public class TargetApplication {
-    public Ellipse Indicator { get; }
-    public TextBlock DisplayText { get; }
-    public Button StartButton { get; }
-    public Button StopButton { get; }
+    public Ellipse Indicator { get; private set; }
+    public TextBlock DisplayText { get; private set; }
+    public Button StartButton { get; private set; }
+    public Button StopButton { get; private set; }
     
     public Dispatcher Dispatcher { get; }
 
+    public ApplicationConfig Config {
+        get => _config;
+        set {
+            if (value.path == _config.path) {
+                _config = value;
+            } else {
+                throw new ArgumentException("Cannot replace config with one containing a different path. Instead construct a new TargetApplication");
+            }
+        }
+    }
+
     private ApplicationConfig _config;
-    
+
     private State _state = new();
     private Dictionary<int, Process> _activeProcesses = new();
     private HashSet<int> _processesCheckedThisCycle = new();
-
+    
     public TargetApplication(ApplicationConfig config) {
         Dispatcher = Dispatcher.CurrentDispatcher;
-        
         _config = config;
         
+        CreateDisplayElements();
+
+        if (_config.autoStart) {
+            StartProcess();
+        }
+    }
+
+    public void Dispose() {
+        StopAllProcesses();
+    }
+
+    public void ReinitializeDisplayElements() {
+        // This is pretty awkward, see https://github.com/arathald/MultiLauncher/issues/11
+        var currentIndicatorFill = Indicator.Fill;
+        var currentStartButtonIsEnabled = StartButton.IsEnabled;
+        var currentStopButtonIsEnabled = StopButton.IsEnabled;
+        CreateDisplayElements();
+        Indicator.Fill = currentIndicatorFill;
+        StartButton.IsEnabled = currentStartButtonIsEnabled;
+        StopButton.IsEnabled = currentStopButtonIsEnabled;
+    }
+
+    private void CreateDisplayElements() {
         Indicator = new Ellipse {
             Fill = Brushes.Gray,
             Stroke = Brushes.White,
@@ -41,26 +75,19 @@ public class TargetApplication {
 
         DisplayText = new TextBlock {
             FontSize = 16,
-            Text = config.displayName,
-            //Foreground = Brushes.Beige
+            Text = _config.displayName
         };
             
         StartButton = new Button {
-            Content = "Start",
-            //Foreground = Brushes.Beige
+            Content = "Start"
         };
         StartButton.Click += StartProcess;
             
         StopButton = new Button {
             Content = "Stop",
-            //Foreground = Brushes.Beige,
             IsEnabled = false
         };
         StopButton.Click += StopAllProcesses;
-
-        if (_config.autoStart) {
-            StartProcess();
-        }
     }
 
     private void StartProcess(object? sender = null, RoutedEventArgs? e = null) {

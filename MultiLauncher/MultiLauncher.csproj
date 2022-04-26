@@ -9,9 +9,9 @@
         <ApplicationIcon>MultiLaunch.ico</ApplicationIcon>
         <Company>arathald</Company>
         <NeutralLanguage>en-US</NeutralLanguage>
-        <AssemblyVersion>1.0.0.1</AssemblyVersion>
-        <FileVersion>1.0.0.1</FileVersion>
-        <Version>1.0.1</Version>
+        <AssemblyVersion>1.0.0.2</AssemblyVersion>
+        <FileVersion>1.0.0.2</FileVersion>
+        <Version>1.0.2</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -20,6 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
       <PackageReference Include="MahApps.Metro" Version="2.4.9" />
       <PackageReference Include="Serilog" Version="2.10.0" />
       <PackageReference Include="Serilog.Exceptions" Version="8.1.0" />
