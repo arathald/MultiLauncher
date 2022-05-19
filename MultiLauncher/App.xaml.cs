@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using Serilog;
 using Serilog.Exceptions;
@@ -8,7 +9,8 @@ namespace MultiLauncher {
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App {
-        public static readonly string ApplicationConfigPath = "applications.json";
+        public const string ApplicationConfigPath = "applications.json";
+        public readonly string? AppVersion;
         
         public App() {
             Log.Logger = new LoggerConfiguration()
@@ -16,7 +18,14 @@ namespace MultiLauncher {
                 .Enrich.WithExceptionDetails()
                 .WriteTo.File("multilauncher_log.txt")
                 .CreateLogger();
-        
+            
+            var filename = Process.GetCurrentProcess().MainModule?.FileName;
+            if (filename != null) {
+                AppVersion = FileVersionInfo.GetVersionInfo(filename).ProductVersion;
+            } else {
+                Log.Warning("Could not get version number from running process");
+            }
+
             if (!File.Exists(ApplicationConfigPath)) {
                 CopyDefaultConfig();
             }

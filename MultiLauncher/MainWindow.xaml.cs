@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -13,8 +12,11 @@ namespace MultiLauncher {
     /// </summary>
     public partial class MainWindow {
         private readonly Dictionary<string, TargetApplication> _applications = new ();
+        private readonly string? AppVersion = ((App) Application.Current).AppVersion;
         
         public MainWindow() {
+            CheckForUpdate();
+            
             try {
                 foreach (var config in ReadConfig()) {
                     var application = new TargetApplication(config);
@@ -40,14 +42,36 @@ namespace MultiLauncher {
             }
         }
 
+        private void CheckForUpdate() {
+            var updater = new Updater(AppVersion);
+            var status = updater.CheckLastUpdateStatus(out var message);
+            var checkForUpdate = true;
+            
+            if (status == Updater.UpdateResult.Succeeded) {
+                MessageBox.Show(message, $"Updated to {AppVersion}", MessageBoxButton.OK);
+                checkForUpdate = false;
+            } else if (status == Updater.UpdateResult.Failed || status == Updater.UpdateResult.Unknown) {
+                var icon = status == Updater.UpdateResult.Failed ? MessageBoxImage.Exclamation : MessageBoxImage.Question;
+                var caption = status == Updater.UpdateResult.Failed ? "Update Failed" : "There may have been an issue with an update";
+                var answer = MessageBox.Show(message, caption, MessageBoxButton.YesNo, icon);
+                if (answer == MessageBoxResult.No) checkForUpdate = false;
+            }
+
+            if (checkForUpdate && updater.HasUpdate()) {
+                var dialogResult = MessageBox.Show(
+                    $"There is an update available to version {updater.NewVersion} (current version: {AppVersion}). Would you like to install it now? MultiLauncher will automatically restart.",
+                    "Update available", MessageBoxButton.YesNo);
+                if (dialogResult == MessageBoxResult.Yes) {
+                    updater.PerformUpdate();
+                }
+            }
+        }
+
         private void Initialize() {
             InitializeComponent();
             
-            var filename = Process.GetCurrentProcess().MainModule?.FileName;
-            if (filename != null) {
-                Version.Text = "Version " + FileVersionInfo.GetVersionInfo(filename).ProductVersion;
-            } else {
-                Log.Warning("Could not get version number from running process");
+            if (AppVersion != null) {
+                Version.Text = "Version " + AppVersion;
             }
             
             Start();
